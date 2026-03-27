@@ -1,0 +1,13 @@
+{
+  "gate_pass": false,
+  "strict_gate": false,
+  "failed_checks": [
+    "Ss: r2<0.4",
+    "Ss: corr<0.6",
+    "Sg: r2<0.7",
+    "Sg: rmse>2.0",
+    "Sg: corr<0.85"
+  ],
+  "model_name": "SwinUNetPhysicsNet3D_Windowed",
+  "use_grace_loss": false
+}

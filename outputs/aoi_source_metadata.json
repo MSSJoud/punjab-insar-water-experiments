@@ -1,0 +1,6 @@
+{
+  "source": "insar_latlon",
+  "stack_dir": "/mnt/data/aoi_punjab_2",
+  "lat_dataset": "lat",
+  "lon_dataset": "lon"
+}

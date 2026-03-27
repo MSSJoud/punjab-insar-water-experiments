@@ -1,0 +1,100 @@
+[
+  {
+    "stack_dir": "/mnt/data/aoi_punjab_2",
+    "file": "disp_all_ll.h5",
+    "exists": true,
+    "datasets": 4,
+    "largest_dataset": "z",
+    "largest_shape": [
+      225,
+      1130,
+      1850
+    ],
+    "largest_dtype": "float32"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab_2",
+    "file": "coh_ll.h5",
+    "exists": true,
+    "datasets": 3,
+    "largest_dataset": "z",
+    "largest_shape": [
+      1130,
+      1850
+    ],
+    "largest_dtype": "float32"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab_2",
+    "file": "vel_ll.h5",
+    "exists": true,
+    "datasets": 3,
+    "largest_dataset": "z",
+    "largest_shape": [
+      1130,
+      1850
+    ],
+    "largest_dtype": "float32"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab_2",
+    "file": "aquisition_dates_ll.h5",
+    "exists": true,
+    "datasets": 1,
+    "largest_dataset": "acquisition_dates",
+    "largest_shape": [
+      1,
+      225
+    ],
+    "largest_dtype": "object"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab",
+    "file": "disp_all_ll.h5",
+    "exists": true,
+    "datasets": 4,
+    "largest_dataset": "z",
+    "largest_shape": [
+      225,
+      1130,
+      1850
+    ],
+    "largest_dtype": "float32"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab",
+    "file": "coh_ll.h5",
+    "exists": true,
+    "datasets": 3,
+    "largest_dataset": "z",
+    "largest_shape": [
+      1130,
+      1850
+    ],
+    "largest_dtype": "float32"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab",
+    "file": "vel_ll.h5",
+    "exists": true,
+    "datasets": 3,
+    "largest_dataset": "z",
+    "largest_shape": [
+      1130,
+      1850
+    ],
+    "largest_dtype": "float32"
+  },
+  {
+    "stack_dir": "/mnt/data/aoi_punjab",
+    "file": "aquisition_dates_ll.h5",
+    "exists": true,
+    "datasets": 1,
+    "largest_dataset": "acquisition_dates",
+    "largest_shape": [
+      1,
+      225
+    ],
+    "largest_dtype": "object"
+  }
+]

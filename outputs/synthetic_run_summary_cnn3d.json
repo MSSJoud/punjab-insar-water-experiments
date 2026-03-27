@@ -1,0 +1,11 @@
+{
+  "device": "cuda",
+  "best_val_loss": 0.5284014940261841,
+  "num_train_windows": 17,
+  "num_val_windows": 3,
+  "num_test_windows": 5,
+  "history_csv": "/home/ubuntu/work/punjab/outputs/synthetic_training_history_cnn3d.csv",
+  "metrics_csv": "/home/ubuntu/work/punjab/outputs/synthetic_gate_metrics_cnn3d.csv",
+  "timeseries_plot": "/home/ubuntu/work/punjab/outputs/figures/synthetic_timeseries_layers_test_cnn3d.png",
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/cnn3d_sg_baseline_best.pt"
+}

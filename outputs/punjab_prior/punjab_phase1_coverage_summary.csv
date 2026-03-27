@@ -1,0 +1,2 @@
+coherence_threshold,time_valid_fraction_threshold,sample_stride,disp_sample_valid_fraction,disp_per_time_valid_min,disp_per_time_valid_max,disp_per_time_valid_mean,time_valid_fraction_mean,coh_valid_fraction,vel_valid_fraction,support_mask_fraction,coh_min,coh_max,vel_min,vel_max
+0.2,0.05,40,0.11592076302274394,0.11592076302274394,0.11592076302274394,0.11592076302274393,0.11224108934402466,0.7125472375029898,0.1122410906481703,0.093310212867735,0.06664219498634338,0.9789242744445801,-68.1079330444336,36.50641632080078

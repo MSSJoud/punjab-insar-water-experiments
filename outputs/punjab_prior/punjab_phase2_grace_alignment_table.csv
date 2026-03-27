@@ -1,0 +1,2 @@
+n_times,date_start,date_end,source_month_start,source_month_end,variable,lwe_thickness_mean,lwe_thickness_std,lwe_thickness_anom_mean,lwe_thickness_anom_std
+225,2016-01-06,2024-01-24,2016-01-01,2024-01-01,lwe_thickness,-40.17859545008597,21.55043126114645,7.579122514774402e-15,8.988444310294147

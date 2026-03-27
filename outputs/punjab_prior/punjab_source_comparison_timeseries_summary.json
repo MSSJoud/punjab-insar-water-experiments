@@ -1,0 +1,9 @@
+{
+  "grace_time_start": "2016-01-06",
+  "grace_time_end": "2024-01-24",
+  "w3ra_time_start": "2016-01-06",
+  "w3ra_time_end": "2024-01-24",
+  "inversion_time_start": "2016-10-20",
+  "inversion_time_end": "2024-01-24",
+  "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_timeseries.png"
+}

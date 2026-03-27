@@ -1,0 +1,9 @@
+stack_dir,file,exists,datasets,largest_dataset,largest_shape,largest_dtype
+/mnt/data/aoi_punjab_2,disp_all_ll.h5,True,4,z,"(225, 1130, 1850)",float32
+/mnt/data/aoi_punjab_2,coh_ll.h5,True,3,z,"(1130, 1850)",float32
+/mnt/data/aoi_punjab_2,vel_ll.h5,True,3,z,"(1130, 1850)",float32
+/mnt/data/aoi_punjab_2,aquisition_dates_ll.h5,True,1,acquisition_dates,"(1, 225)",object
+/mnt/data/aoi_punjab,disp_all_ll.h5,True,4,z,"(225, 1130, 1850)",float32
+/mnt/data/aoi_punjab,coh_ll.h5,True,3,z,"(1130, 1850)",float32
+/mnt/data/aoi_punjab,vel_ll.h5,True,3,z,"(1130, 1850)",float32
+/mnt/data/aoi_punjab,aquisition_dates_ll.h5,True,1,acquisition_dates,"(1, 225)",object

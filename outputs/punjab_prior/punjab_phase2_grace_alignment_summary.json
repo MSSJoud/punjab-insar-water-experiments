@@ -1,0 +1,22 @@
+{
+  "n_times": 225,
+  "date_start": "2016-01-06",
+  "date_end": "2024-01-24",
+  "source_month_start": "2016-01-01",
+  "source_month_end": "2024-01-01",
+  "variable": "lwe_thickness",
+  "lwe_thickness_mean": -40.17859545008597,
+  "lwe_thickness_std": 21.55043126114645,
+  "lwe_thickness_anom_mean": 7.579122514774402e-15,
+  "lwe_thickness_anom_std": 8.988444310294147,
+  "config": {
+    "path": "/mnt/data/punjab_grace_mascon_l3/GRCTellus.JPL.200204_202512.GLO.RL06.3M.MSCNv04CRI.nc",
+    "variable": "lwe_thickness",
+    "uncertainty_variable": "uncertainty",
+    "lat_min": 29.0,
+    "lat_max": 33.0,
+    "lon_min": 73.0,
+    "lon_max": 77.0,
+    "write_aligned_dataset": true
+  }
+}

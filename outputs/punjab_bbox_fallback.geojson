@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "punjab_bbox_fallback",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "name": "punjab_bbox_fallback" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 76.881597222177788, 31.122499999977791 ], [ 76.881597222177788, 31.749722222222211 ], [ 75.59756944442222, 31.749722222222211 ], [ 75.59756944442222, 31.122499999977791 ], [ 76.881597222177788, 31.122499999977791 ] ] ] } }
+]
+}

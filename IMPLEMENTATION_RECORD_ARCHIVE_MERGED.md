@@ -1,0 +1,752 @@
+# Punjab Implementation Record
+
+## Purpose
+This document tracks implementation status, decisions, and next actions for the Punjab InSAR to groundwater inversion workflow.
+It is not a runtime/process log.
+
+## Scope
+- Project: Punjab InSAR time-series analysis and physics-aware inversion to groundwater-related storage
+- Primary notebook: `punjab_synthetic_to_real_pipeline.ipynb`
+- Supporting notebook: `punjab_timeseries_w3ra_swin_bootstrap.ipynb`
+- Plan source: `STEPWISE_PLAN.md`
+- Outputs folder: `punjab/outputs/`
+
+## Separation from Process Logs
+- This file: implementation record (what/why/decision/state)
+- Process logs: execution logs and long-running job outputs
+- Suggested process-log location: `punjab/outputs/logs/`
+
+## Current Status
+- `STEPWISE_PLAN.md` updated to implementation-ready structure.
+- Notebook block added for:
+  - Punjab HDF5 QC inventory export
+  - Synthetic gate metrics export
+  - AOI fallback polygon generation
+  - W3RA clipping smoke-test path
+- Synthetic scaffold training executed on CUDA and completed test epochs.
+- Punjab-specific W3RA MAT path confirmed and converted to NetCDF.
+- Clip smoke test completed and output saved.
+
+## 2026-03-14 Punjab Phase 1 Kickoff
+- Change summary:
+  - Declared the synthetic notebook complete for the current paper-facing synthetic phase.
+  - Extracted reusable code from `punjab_synthetic_to_real_pipeline.ipynb` into an importable package:
+    - `punjab_inversion/physics.py`
+    - `punjab_inversion/metrics.py`
+    - `punjab_inversion/models.py`
+  - Created a new working notebook for the real-data stage:
+    - `punjab_prior_constrained_inversion.ipynb`
+  - Narrowed the first Punjab implementation to generic priors only:
+    - forward consistency
+    - spatial regularization
+    - temporal regularization
+  - Deferred `GRACE`, `W3RA`, and `GPS` as explicit priors to a later integration phase.
+  - Wired the new notebook to real data sources in metadata-first mode:
+    - deformation stack: `/mnt/data/aoi_punjab/`
+    - clipped W3RA reference file: `outputs/W3RA_punjab_preclipped.nc`
+- Files/cells touched:
+  - `punjab_inversion/__init__.py`
+  - `punjab_inversion/physics.py`
+  - `punjab_inversion/metrics.py`
+  - `punjab_inversion/models.py`
+  - `punjab_prior_constrained_inversion.ipynb`
+  - `STEPWISE_PLAN.md`
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Extracted modules compile cleanly.
+  - Import/forward-shape tests passed in `swin_env`.
+  - The new Punjab notebook compiles cleanly.
+  - Real-data metadata wiring confirmed:
+    - Punjab deformation stack shape: `(225, 1130, 1850)`
+    - Punjab acquisition date span: `2016-01-06` to `2024-01-24`
+    - Clipped W3RA reference span: `2003-01-01` to `2024-12-01`
+    - Clipped W3RA grid shape for `S0`/`Sg`: `(264, 41, 41)`
+- Output paths relevant to this phase:
+  - `punjab_prior_constrained_inversion.ipynb`
+  - `punjab_inversion/physics.py`
+  - `punjab_inversion/metrics.py`
+  - `punjab_inversion/models.py`
+  - `outputs/W3RA_punjab_preclipped.nc`
+  - `outputs/punjab_h5_qc_inventory.csv`
+  - `outputs/punjab_h5_qc_inventory.json`
+- Next action:
+  - Add valid-data and coherence coverage diagnostics to the new Punjab notebook.
+  - Define chronological splits and the first windowed Punjab dataset.
+  - Build the first end-to-end phase-1 inversion scaffold using only generic priors.
+
+## Artifacts Produced So Far
+- `punjab/outputs/punjab_h5_qc_inventory.csv`
+- `punjab/outputs/punjab_h5_qc_inventory.json`
+- `punjab/outputs/synthetic_gate_metrics.csv`
+- `punjab/outputs/punjab_bbox_fallback.geojson`
+- `punjab/outputs/W3RA_punjab_preclipped.nc`
+- `punjab/outputs/w3ra_clip_smoke_test.nc`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_frequency_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_frequency_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_frequency_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_dualdec_frequency_vs_baselines.png`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_noise_aug_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_noise_aug_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_noise_aug_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_dualdec_noise_aug_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_stabilized_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_stabilized_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_dualdec_stabilized_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_dualdec_stabilized_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_denoise_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_denoise_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_denoise_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_denoise_dualdec_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_uncertainty_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_uncertainty_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_uncertainty_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_uncertainty_dualdec_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_weighted_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_weighted_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_weighted_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_weighted_dualdec_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_aux_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_aux_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_aux_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_aux_dualdec_vs_baseline.png`
+- `punjab/outputs/synthetic_two_layer_balanced_anchor_conditioned_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_anchor_conditioned_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_anchor_conditioned_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_anchor_conditioned_dualdec_vs_baselines.png`
+- `punjab/outputs/synthetic_two_layer_balanced_film_conditioned_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_film_conditioned_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_film_conditioned_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_film_conditioned_dualdec_vs_baselines.png`
+- `punjab/outputs/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_metrics.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_history.csv`
+- `punjab/outputs/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_summary.json`
+- `punjab/outputs/figures/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_vs_baselines.png`
+
+## Decisions Confirmed
+- Notebook-first implementation.
+- Synthetic-first validation is a hard gate before Punjab fine-tuning.
+- No GRACE integration in current phase.
+- Focus only on Punjab files/workflow.
+
+## Next Execution Block
+1. Define explicit synthetic gate thresholds (`R2`, RMSE, correlation, forward residual).
+2. Add strict time-based train/val/test split cell for synthetic and real phases.
+3. Finalize W3RA to InSAR temporal alignment cell (acquisition-date aligned tensors).
+4. Add Punjab fine-tuning scaffold initialized from synthetic weights.
+5. Export standardized metrics table for synthetic and Punjab runs.
+
+## Update Rule
+After each meaningful implementation step, append:
+- date
+- change summary
+- files/cells touched
+- verification result
+- next action
+
+## 2026-03-09 Update
+- Change summary:
+  - Added strict chronological train/val/test split to synthetic training scaffold.
+  - Added early stopping + best-checkpoint save and training-history export.
+  - Added explicit synthetic gate thresholds with fail-fast assertion on test split.
+  - Hardened AOI clipping cell to require InSAR-derived lat/lon unless fallback is explicitly enabled.
+  - Added AOI source metadata export for traceability.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cell 9 (training scaffold)
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cell 13 (synthetic gate metrics)
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cell 14 (AOI clipping smoke test)
+- Verification result:
+  - Notebook content updated and key safeguards present in source.
+  - Static notebook diagnostics may still show environment-dependent import warnings until runtime kernel packages are active.
+- Next action:
+  - Execute notebook from Cell 9 onward to regenerate metrics and confirm gate pass/fail.
+  - If gate fails, tune model/training settings before starting Punjab fine-tuning.
+
+## 2026-03-12 Update
+- Change summary:
+  - Added a dual-decoder frequency-separated two-layer benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the balanced synthetic setup and split the model after a shared encoder into dedicated `S0` and `Sg` decoders.
+  - Added a notebook comparison section against the earlier branch-aware and frequency-separated baselines.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 99-102
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env` on the balanced two-layer synthetic task.
+  - Clean-case results are the strongest so far:
+    - `S0`: RMSE `3.1367`, `R^2 0.8145`, corr `0.9039`, slope `0.8578`
+    - `Sg`: RMSE `2.2325`, `R^2 0.9175`, corr `0.9614`, slope `0.8481`
+  - Noisy cases still degrade substantially, but the dual-decoder variant improved over prior baselines in some settings:
+    - `noise=0.01`: best of the three tested variants for both `S0` and `Sg`
+    - `noise=0.05`: best of the three for `Sg`, and slightly best for `S0`
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_frequency_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_frequency_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_frequency_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_dualdec_frequency_vs_baselines.png`
+- Next action:
+  - Keep the dual-decoder frequency-separated model as the current best clean-case two-layer architecture.
+  - Focus next on improving robustness for the noisy balanced two-layer stages before returning to the full layered test or real Punjab inversion.
+
+## Current Scientific Status Statement
+- The synthetic workflow is no longer failing for structural reasons alone.
+- After balancing the elastic and poroelastic forward contributions and separating the decoder into `S0` and `Sg` branches, the two-layer clean synthetic benchmark now performs well.
+- The current best clean-case two-layer result is:
+  - `S0`: RMSE `3.1367`, `R^2 0.8145`, corr `0.9039`, slope `0.8578`
+  - `Sg`: RMSE `2.2325`, `R^2 0.9175`, corr `0.9614`, slope `0.8481`
+- This means the inversion is learnable under controlled balanced synthetic conditions.
+- However, the method is still noise-fragile: under low-noise to moderate-noise balanced two-layer tests, performance drops substantially and most noisy `R^2` values remain near zero or negative.
+- Therefore the correct claim at this stage is:
+  - we have a credible candidate architecture and synthetic proof-of-concept,
+  - but we do not yet have a robust validated inversion method for real Punjab data.
+
+## Current Strategy
+1. Keep the balanced synthetic setup as the main benchmark.
+2. Keep the dual-decoder frequency-separated model as the current leading architecture.
+3. Optimize specifically for noisy balanced two-layer performance before adding more layers.
+4. Use the noisy two-layer benchmark as the main gate:
+   - target sustained positive `R^2`,
+   - stable positive correlation,
+   - slope closer to `1`,
+   - low forward residual.
+5. Only after noisy two-layer robustness is improved should we return to:
+   - the full layered synthetic test,
+   - then Punjab transfer/fine-tuning.
+
+## 2026-03-12 Noise-Augmentation Update
+- Change summary:
+  - Added a noise-augmented dual-decoder curriculum benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the balanced dual-decoder architecture fixed and trained each noisy stage on a small mixture of noise levels up to the target stage.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 103-106
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - The mixed-noise curriculum did not improve robustness consistently.
+  - It degraded the clean case:
+    - `S0`: `R^2 0.8145 -> 0.5804`
+    - `Sg`: `R^2 0.9175 -> 0.8075`
+  - It also hurt most low-noise cases (`0.01`, `0.02`).
+  - It helped `Sg` modestly at the hardest tested noisy stage (`0.05`):
+    - `R^2 -0.0538 -> -0.0370`
+    - corr `0.0963 -> 0.1852`
+    - slope `0.0324 -> 0.0816`
+- Interpretation:
+  - Simple mixed-noise curriculum is not the main fix.
+  - The current best overall model remains the plain dual-decoder frequency-separated curriculum for clean performance, with only partial noisy-stage gains from noise augmentation.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_noise_aug_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_noise_aug_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_noise_aug_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_dualdec_noise_aug_vs_baseline.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the baseline.
+  - Focus next on targeted noisy-stage stabilization rather than broad mixed-noise augmentation.
+
+## 2026-03-12 Noisy-Stage Stabilization Update
+- Change summary:
+  - Added a stabilized noisy-stage dual-decoder benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the balanced dual-decoder architecture fixed and briefly froze the shared encoder/encoder bottleneck during noisy-stage adaptation.
+  - Reduced learning rate for the noisy stages to test whether preserving the clean representation would improve robustness.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 107-110
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - This did not improve the noisy stages consistently.
+  - It degraded the clean case:
+    - `S0`: `R^2 0.8145 -> 0.5905`
+    - `Sg`: `R^2 0.9175 -> 0.8157`
+  - It helped only modestly in a narrow case:
+    - at `noise=0.02`, `Sg` improved from `R^2 -0.1632` to `-0.0854`
+  - At `noise=0.05`, it became worse than the plain dual-decoder baseline for `Sg`.
+- Interpretation:
+  - Simple early freezing of the shared encoder is not the main fix.
+  - The plain dual-decoder frequency-separated curriculum remains the current best overall architecture.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_stabilized_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_stabilized_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_dualdec_stabilized_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_dualdec_stabilized_vs_baseline.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the primary baseline.
+  - Move next toward data-space denoising or explicit uncertainty-aware training rather than more freeze/unfreeze scheduling.
+
+## 2026-03-12 Denoising Front-End Update
+- Change summary:
+  - Added a denoising-front-end dual-decoder benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Inserted a small residual 3D denoiser before the current best dual-decoder frequency-separated model.
+  - Supervised the denoiser against clean synthetic deformation windows while keeping the latent inversion losses on `S0` and `Sg`.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 111-114
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - The denoising front-end did not improve the overall inversion.
+  - It degraded the clean case:
+    - `S0`: `R^2 0.8145 -> 0.6228`
+    - `Sg`: `R^2 0.9175 -> 0.8380`
+  - It helped `S0` modestly at `noise=0.05`:
+    - `R^2 -0.0602 -> -0.0286`
+    - corr `-0.0047 -> 0.0492`
+  - But it made `Sg` worse at every noisy stage.
+- Interpretation:
+  - Explicit supervised denoising of the deformation input is not the main fix in the current setup.
+  - The plain dual-decoder frequency-separated curriculum remains the best overall architecture.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_denoise_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_denoise_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_denoise_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_denoise_dualdec_vs_baseline.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated benchmark as the current reference model.
+  - Move next toward uncertainty-aware or heteroscedastic training rather than explicit denoising or additional scheduling heuristics.
+
+## 2026-03-13 Uncertainty-Aware Update
+- Change summary:
+  - Added an uncertainty-aware dual-decoder benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the balanced dual-decoder frequency-separated backbone and added per-layer heteroscedastic log-variance outputs for `S0` and `Sg`.
+  - Replaced the plain state MSE with a Gaussian negative log-likelihood style state loss while keeping the physics-consistency term.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 115-118
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - This was not an improvement over the plain dual-decoder baseline.
+  - It degraded the clean case:
+    - `S0`: `R^2 0.8145 -> 0.4592`
+    - `Sg`: `R^2 0.9175 -> 0.7569`
+  - It also degraded every noisy stage that was tested.
+  - Representative `Sg` noisy results:
+    - `noise=0.01`: `R^2 -0.0612 -> -0.4064`
+    - `noise=0.02`: `R^2 -0.1632 -> -0.5188`
+    - `noise=0.05`: `R^2 -0.0538 -> -0.5213`
+- Interpretation:
+  - A straightforward heteroscedastic output loss is not the right fix in the current setup.
+  - The uncertainty-aware model appears to relax the state fit too aggressively rather than stabilizing the inversion.
+  - The plain dual-decoder frequency-separated curriculum remains the best overall reference architecture.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_uncertainty_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_uncertainty_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_uncertainty_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_uncertainty_dualdec_vs_baseline.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated benchmark as the current reference model.
+  - If uncertainty is revisited later, do it as calibrated post-hoc uncertainty or masked weighting tied to known noise proxies, not as a free heteroscedastic output head.
+
+## 2026-03-13 Ordered Robustness Sweep Update
+- Change summary:
+  - Ran the next three robustness options in order on top of the balanced two-layer synthetic benchmark:
+    - noise-proxy weighted loss,
+    - noise-level conditioned model,
+    - auxiliary deformation reconstruction head.
+  - Kept the plain dual-decoder frequency-separated model as the common reference baseline.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 119-130
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - All three benchmarks executed successfully in `swin_env`.
+  - Noise-proxy weighted loss was not the main fix:
+    - hurt the clean case,
+    - modestly improved `Sg` correlation at `noise=0.01`,
+    - collapsed badly for `Sg` at `noise=0.05`.
+  - Noise-level conditioning was the most promising of the three:
+    - still hurt the clean case,
+    - but improved `Sg` strongly at `noise=0.02`:
+      - `R^2 -0.1632 -> -0.0004`
+      - corr `-0.0455 -> 0.1763`
+      - slope `-0.0164 -> 0.0613`
+    - and improved `S0` at `noise=0.05`:
+      - `R^2 -0.0602 -> -0.0191`
+      - corr `-0.0047 -> 0.0662`
+  - Auxiliary deformation supervision was mixed:
+    - slightly improved `S0` at `noise=0.01`, `0.02`, and `0.05`,
+    - but did not improve `Sg` over the baseline.
+- Interpretation:
+  - The best overall clean-case model is still the plain dual-decoder frequency-separated curriculum.
+  - The most informative robustness variant from this ordered sweep is the noise-level conditioned model.
+  - If we continue pushing noisy-stage robustness, the strongest next branch is to build on noise-level conditioning rather than weighted-loss or auxiliary-head variants.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_weighted_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_weighted_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_weighted_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_weighted_dualdec_vs_baseline.png`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_vs_baseline.png`
+  - `punjab/outputs/synthetic_two_layer_balanced_aux_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_aux_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_aux_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_aux_dualdec_vs_baseline.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated benchmark as the clean-case reference.
+  - If we continue robustness work, use the noise-level conditioned model as the next branch to refine rather than starting from the weighted-loss or auxiliary-head variants.
+
+## 2026-03-13 Anchored Conditioning Update
+- Change summary:
+  - Added an anchored noise-conditioned refinement to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Used the plain clean-stage dual-decoder as the anchor, then mapped it into the noise-conditioned model with the conditioning channel initialized to zero influence before noisy-stage adaptation.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 131-134
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - Anchoring preserved the clean case slightly better than direct conditioning:
+    - clean `S0`: `R^2 0.5705 -> 0.5804`
+    - clean `Sg`: `R^2 0.7927 -> 0.8075`
+  - It also improved `S0` at `noise=0.02` relative to direct conditioning:
+    - `R^2 -0.0682 -> -0.0281`
+  - However, it lost the strongest noisy `Sg` gain from direct conditioning:
+    - direct conditioned `Sg` at `noise=0.02`: `R^2 -0.0004`, corr `0.1763`
+    - anchored conditioned `Sg` at `noise=0.02`: `R^2 -0.2266`, corr `-0.1227`
+- Interpretation:
+  - Anchoring helps preserve clean-stage behavior, but it suppresses the main `Sg` robustness gain that made direct conditioning interesting.
+  - So the current tradeoff is clear:
+    - best clean case: plain dual-decoder frequency-separated baseline
+    - best noisy `Sg` branch so far: direct noise-level conditioned dual-decoder
+    - best anchored compromise for `S0`: anchored conditioned variant
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_anchor_conditioned_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_anchor_conditioned_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_anchor_conditioned_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_anchor_conditioned_dualdec_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean-case reference.
+  - Keep the direct noise-level conditioned model as the most promising robustness branch.
+  - If we continue this branch, refine direct conditioning rather than anchored conditioning.
+
+## 2026-03-13 FiLM Conditioning Update
+- Change summary:
+  - Added a FiLM-style noise-conditioned dual-decoder benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the raw deformation pathway identical to the plain dual-decoder and injected the noise level only at the shared bottleneck through learned affine modulation.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 135-138
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - FiLM conditioning improved over the plain baseline for `Sg` at `noise=0.02`:
+    - `R^2 -0.1632 -> -0.0321`
+    - corr `-0.0455 -> 0.1404`
+    - slope `-0.0164 -> 0.0516`
+  - It also improved `S0` over baseline at `noise=0.01` and `0.05`.
+  - However, it did not beat the direct input-conditioned model overall:
+    - direct conditioning still gave the best noisy `Sg` result at `noise=0.02`
+    - FiLM also did not recover the clean case better than direct conditioning.
+- Interpretation:
+  - Conditioning the model is still the right branch.
+  - But in the current implementation, direct input conditioning remains stronger than FiLM bottleneck conditioning for noisy `Sg` recovery.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_film_conditioned_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_film_conditioned_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_film_conditioned_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_film_conditioned_dualdec_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean-case reference.
+  - Keep the direct noise-level conditioned model as the strongest noisy-robustness branch.
+  - If we continue refining, refine direct conditioning rather than FiLM or anchored conditioning.
+
+## 2026-03-13 Clean-Anchor Direct Conditioning Update
+- Change summary:
+  - Added a clean-anchor direct conditioning refinement to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the direct input-conditioned model, but mixed a small clean subset into each noisy training stage to preserve the clean inverse map.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 139-142
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - It remained better than the plain baseline for `Sg` at `noise=0.02`:
+    - baseline `Sg`: `R^2 -0.1632`, corr `-0.0455`
+    - clean-anchor conditioned `Sg`: `R^2 -0.0284`, corr `0.1027`
+  - But it still did not beat the direct conditioned model at the same stage:
+    - direct conditioned `Sg`: `R^2 -0.0004`, corr `0.1763`
+  - At `noise=0.05`, it improved `S0` over the plain baseline, but `Sg` remained weaker than the plain baseline.
+- Interpretation:
+  - A light clean-anchor helps somewhat, but it does not outperform direct conditioning where the noisy `Sg` gain matters most.
+  - The direct noise-level conditioned model remains the strongest robustness branch overall.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_clean_anchor_conditioned_dualdec_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean-case reference.
+  - Keep the direct noise-level conditioned model as the main robustness branch to refine further.
+
+## 2026-03-13 Corrected Direct Conditioning Update
+- Change summary:
+  - Added a corrected direct noise-conditioned benchmark to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the same direct input-conditioned dual-decoder branch, but fixed a conditioning bug in the stage-wise setup: the noise channel is now preserved explicitly instead of being normalized away inside each single-noise stage.
+  - Applied only narrow tuning on this branch:
+    - preserved explicit direct conditioning
+    - normalized deformation only
+    - kept the noise channel as a raw scaled conditioning signal
+    - used slightly longer clean-stage training and mild stage-wise LR scaling
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 143-146
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - Fixing the conditioning signal improved the clean case relative to the original direct-conditioned model:
+    - clean `S0`: `R^2 0.5705 -> 0.6484`, corr `0.7562 -> 0.8055`
+    - clean `Sg`: `R^2 0.7927 -> 0.8353`, corr `0.8967 -> 0.9183`
+  - It also improved `S0` at `noise=0.02` relative to the original direct-conditioned model:
+    - `R^2 -0.0682 -> -0.0290`
+    - corr `-0.0164 -> 0.0276`
+  - But it lost the main noisy `Sg` gain that made the original direct-conditioned model promising:
+    - original direct-conditioned `Sg` at `noise=0.02`: `R^2 -0.0004`, corr `0.1763`, slope `0.0613`
+    - corrected direct-conditioned `Sg` at `noise=0.02`: `R^2 -0.0580`, corr `0.0244`, slope `0.0065`
+  - At `noise=0.05`, the corrected variant also remained weaker than the original direct-conditioned model for `Sg`.
+- Interpretation:
+  - This was an important correction, because it showed that the earlier direct-conditioning implementation was partly benefiting from the branch reparameterization rather than a truly active per-stage conditioning signal.
+  - The corrected version is better behaved in the clean case, but it gives back too much of the noisy-stage `Sg` robustness.
+  - So the tradeoff is now sharper:
+    - best clean direct-conditioned variant: corrected direct conditioning
+    - best noisy `Sg` direct-conditioned variant: original direct conditioning
+    - best overall clean reference remains the plain dual-decoder frequency-separated baseline
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_refined_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_refined_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_refined_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_refined_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean anchor.
+  - Keep the original direct noise-level conditioned model as the strongest noisy `Sg` branch.
+  - If we continue refining this branch, tune direct conditioning with that tradeoff in mind rather than opening new architectural branches.
+
+## 2026-03-13 Jittered Direct Conditioning Update
+- Change summary:
+  - Added a jittered direct noise-conditioned refinement to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Stayed on the same direct input-conditioned dual-decoder branch, but introduced per-window noise jitter inside each nominal stage so the conditioning signal varied across windows instead of remaining constant within a stage.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 147-150
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - The jittered variant did not improve the direct-conditioned branch.
+  - Clean metrics matched the corrected direct-conditioned run because the clean stage still has zero noise.
+  - Under noisy stages, the jittered variant was worse than both the original direct-conditioned model and the corrected direct-conditioned model for `Sg`:
+    - at `noise=0.02`, `Sg` changed from original direct-conditioned `R^2 -0.0004`, corr `0.1763`, slope `0.0613`
+      to jittered direct-conditioned `R^2 -0.1635`, corr `-0.0419`, slope `-0.0151`
+    - at `noise=0.05`, it also dropped below the plain baseline for `Sg`
+  - `S0` also deteriorated across noisy stages relative to the original direct-conditioned branch.
+- Interpretation:
+  - Per-window noise jitter inside a nominal stage does not stabilize the direct-conditioning branch in the current setup.
+  - The best noisy `Sg` result still belongs to the original direct noise-level conditioned model.
+  - The best clean direct-conditioned result still belongs to the corrected direct-conditioned variant.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_jitter_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_jitter_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_jitter_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_jitter_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean anchor.
+  - Keep the original direct noise-level conditioned model as the strongest noisy `Sg` branch.
+  - If we continue tuning this branch, focus on preserving the original noisy `Sg` gain while recovering clean performance, rather than adding within-stage noise jitter.
+
+## 2026-03-13 Cumulative Direct Conditioning Update
+- Change summary:
+  - Added a cumulative direct-conditioned refinement to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the same direct input-conditioned dual-decoder branch, but trained each later stage on a cumulative mix of all lower noise levels up to that stage.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 151-154
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - The cumulative mixed-noise stage training did not help the branch overall.
+  - It preserved the corrected clean-stage metrics, but it hurt `Sg` strongly at `noise=0.02`:
+    - original direct-conditioned `Sg`: `R^2 -0.0004`, corr `0.1763`, slope `0.0613`
+    - cumulative direct-conditioned `Sg`: `R^2 -0.5017`, corr `-0.2619`, slope `-0.1265`
+  - It also failed to improve the `0.05` noisy stage.
+- Interpretation:
+  - Mixing lower-noise samples into each later stage destabilizes the noisy `Sg` branch in the current setup.
+  - This is not the right refinement path for the direct-conditioned model.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_cumulative_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_cumulative_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_cumulative_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_cumulative_vs_baselines.png`
+
+## 2026-03-13 Hybrid Direct Conditioning Update
+- Change summary:
+  - Added a hybrid direct-conditioned refinement to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Stayed on the same direct input-conditioned dual-decoder branch, but combined the strongest existing pieces:
+    - corrected conditioning for the clean stage
+    - original stagewise noisy adaptation for later stages
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 155-158
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - This is the best direct-conditioning refinement so far.
+  - It preserved the stronger corrected clean-stage behavior:
+    - clean `S0`: `R^2 0.6484`, corr `0.8055`
+    - clean `Sg`: `R^2 0.8353`, corr `0.9183`
+  - It also improved the key noisy `Sg` stage beyond the original direct-conditioned model:
+    - at `noise=0.02`, original direct-conditioned `Sg`: `R^2 -0.0004`, corr `0.1763`, RMSE `7.7725`
+    - hybrid direct-conditioned `Sg`: `R^2 0.0272`, corr `0.1977`, RMSE `7.6644`
+  - It improved `S0` over the original direct-conditioned model at `noise=0.02` and `0.05`:
+    - `noise=0.05` `S0`: `R^2 -0.0191 -> -0.0026`, corr `0.0662 -> 0.0749`
+  - At `noise=0.05`, `Sg` also improved over the original direct-conditioned model:
+    - `R^2 -0.0808 -> -0.0584`
+    - corr `0.0115 -> 0.0305`
+- Interpretation:
+  - This is the first direct-conditioning variant that improves the clean stage and still improves the main noisy `Sg` stage instead of trading one off for the other.
+  - The hybrid schedule is now the strongest direct-conditioned branch.
+  - The remaining gap is still to the plain dual-decoder clean baseline, but the direct-conditioned branch is now materially closer to a useful two-signal solution.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean anchor.
+  - Promote the hybrid direct-conditioned model to the main robustness branch.
+  - Continue refinement from the hybrid branch rather than the original, corrected, jittered, or cumulative variants.
+
+## 2026-03-13 Hybrid Noisy-Stage Sg-Emphasis Update
+- Change summary:
+  - Added a narrow refinement on top of the hybrid direct-conditioned branch in `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the hybrid schedule unchanged:
+    - corrected conditioning at the clean stage
+    - original stagewise noisy adaptation later
+  - Changed only the noisy-stage loss balance to emphasize `Sg` slightly more and `S0` slightly less.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 159-162
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - This refinement gave a small but consistent improvement over the hybrid baseline at the noisy stages.
+  - Most important gains:
+    - at `noise=0.02`, `Sg` improved from hybrid
+      - `RMSE 7.6644 -> 7.6586`
+      - `R^2 0.0272 -> 0.0287`
+      - corr `0.1977 -> 0.1994`
+    - at `noise=0.05`, `Sg` improved more clearly
+      - `RMSE 7.9949 -> 7.9153`
+      - `R^2 -0.0584 -> -0.0375`
+      - corr `0.0305 -> 0.0556`
+      - slope `0.0082 -> 0.0141`
+  - `S0` stayed essentially similar, with slight gains at `noise=0.01` and `0.02`, and a tiny tradeoff in RMSE at `noise=0.05`.
+- Interpretation:
+  - This is the best direct-conditioned branch so far.
+  - The improvement is incremental rather than dramatic, but it moves the noisy two-signal benchmark in the right direction without giving back the clean-stage gains from the hybrid schedule.
+  - The path is now clear:
+    - plain dual-decoder = clean anchor
+    - hybrid + noisy-stage `Sg` emphasis = strongest robustness branch
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_vs_baselines.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean anchor.
+  - Promote the hybrid noisy-stage `Sg`-emphasis model to the main refinement branch.
+  - Continue only with narrow tuning on this branch.
+
+## 2026-03-13 Hybrid Stage-Adaptive Update
+- Change summary:
+  - Added a stage-adaptive refinement on top of the hybrid direct-conditioned branch in `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the clean stage unchanged.
+  - Increased `Sg` emphasis progressively with noise and reduced learning rate only at the higher-noise stages, especially `noise=0.05`.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 163-166
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Benchmark executed successfully in `swin_env`.
+  - The stage-adaptive refinement did not improve the branch overall.
+  - It slightly improved `S0` at `noise=0.05`:
+    - `R^2 -0.0029 -> 0.0058`
+    - corr `0.0793 -> 0.1177`
+  - But it damaged `Sg` badly at the same stage:
+    - hybrid `Sg` at `noise=0.05`: `RMSE 7.9153`, `R^2 -0.0375`, corr `0.0556`
+    - stage-adaptive `Sg` at `noise=0.05`: `RMSE 8.8332`, `R^2 -0.2921`, corr `-0.1112`
+  - It also underperformed the hybrid `Sg`-emphasis branch at `noise=0.02`.
+- Interpretation:
+  - Making the later noisy stages more aggressive for `Sg` is not the right next refinement in this form.
+  - The current best robustness branch remains the simpler hybrid noisy-stage `Sg`-emphasis model.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_adaptive_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_adaptive_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_adaptive_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_adaptive_vs_hybrid.png`
+- Next action:
+  - Keep the plain dual-decoder frequency-separated model as the clean anchor.
+  - Keep the hybrid noisy-stage `Sg`-emphasis model as the main refinement branch.
+  - Continue only with smaller, more local tuning from that branch rather than stronger stage-adaptive changes.
+
+## 2026-03-13 Best-Branch Multi-Seed Validation
+- Change summary:
+  - Added a three-seed validation section for the current best branch in `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the best branch fixed:
+    - hybrid direct conditioning
+    - corrected clean stage
+    - noisy-stage `Sg` emphasis
+  - Re-ran the branch for seeds `7`, `21`, and `42` to measure stability.
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 167-170
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - Multi-seed validation executed successfully in `swin_env`.
+  - Clean-stage behavior is reasonably stable:
+    - clean `S0`: `R^2 mean 0.6237 ± 0.0273`
+    - clean `Sg`: `R^2 mean 0.8350 ± 0.0140`
+  - Noisy-stage behavior is not yet stable enough:
+    - `noise=0.01`, `Sg`: `R^2 mean -0.1276 ± 0.0710`, corr `0.0393 ± 0.0920`
+    - `noise=0.02`, `Sg`: `R^2 mean -0.2035 ± 0.0558`, corr `-0.0514 ± 0.0383`
+    - `noise=0.05`, `Sg`: `R^2 mean -0.3130 ± 0.1531`, corr `-0.0458 ± 0.1545`
+  - So the promising single-run branch does not hold up reliably across seeds at the noisy stages.
+- Interpretation:
+  - This is an important decision result.
+  - We do have a credible synthetic candidate architecture and a meaningful refinement path.
+  - But the current noisy two-signal inversion is still too seed-sensitive to call the method robust or ready for real Punjab inversion.
+  - At this point the work is in a strong proof-of-concept state, not a finalized solution state.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_multiseed_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_multiseed_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_multiseed_summary.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_multiseed_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_multiseed.png`
+- Next action:
+  - Treat the current branch as the best proof-of-concept synthetic model, not yet a stable final model.
+  - If we continue refining, focus on reducing seed sensitivity rather than opening new architecture branches.
+  - If we stop now, report this honestly as a promising but still noise-fragile synthetic benchmark.
+
+## 2026-03-13 EMA Final Round
+- Change summary:
+  - Added a final-round EMA stabilization experiment to `punjab_synthetic_to_real_pipeline.ipynb`.
+  - Kept the best branch fixed:
+    - hybrid direct conditioning
+    - corrected clean stage
+    - noisy-stage `Sg` emphasis
+  - Added only one training stabilizer:
+    - exponential moving average of weights
+    - \\(\\bar\\theta_t = \\beta \\bar\\theta_{t-1} + (1-\\beta)\\theta_t\\)
+- Files/cells touched:
+  - `punjab_synthetic_to_real_pipeline.ipynb` Cells 171-174
+  - `IMPLEMENTATION_RECORD.md`
+- Verification result:
+  - EMA final-round validation executed successfully in `swin_env`.
+  - It reduced variance strongly, but by collapsing the model toward underfitting.
+  - Clean-stage quality degraded severely:
+    - previous best-branch clean `S0`: `R^2 mean 0.6237`
+    - EMA clean `S0`: `R^2 mean 0.0170`
+    - previous best-branch clean `Sg`: `R^2 mean 0.8350`
+    - EMA clean `Sg`: `R^2 mean 0.0424`
+  - Noisy-stage averages became numerically less negative, but this came from flattening the solution rather than improving the inverse map.
+- Interpretation:
+  - EMA is not the right final stabilizer here in its current form.
+  - It improves apparent cross-seed consistency only by oversmoothing the solution and losing the clean inverse map.
+  - So the pre-EMA hybrid noisy-stage `Sg`-emphasis branch remains the best final candidate from this round.
+- Output paths:
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_ema_multiseed_metrics.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_ema_multiseed_history.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_ema_multiseed_summary.csv`
+  - `punjab/outputs/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_ema_multiseed_summary.json`
+  - `punjab/outputs/figures/synthetic_two_layer_balanced_conditioned_dualdec_hybrid_sg_ema_multiseed.png`
+- Final status after this round:
+  - Best clean anchor: plain dual-decoder frequency-separated model
+  - Best proof-of-concept robustness branch: hybrid direct conditioning + noisy-stage `Sg` emphasis
+  - Not yet stable enough across seeds to claim a robust final model

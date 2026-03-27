@@ -1,0 +1,18 @@
+{
+  "path": "/mnt/data/punjab_grace_mascon_l3/GRCTellus.JPL.200204_202512.GLO.RL06.3M.MSCNv04CRI.nc",
+  "n_times_total": 252,
+  "n_times_overlap": 80,
+  "date_start_overlap": "2016-01-16",
+  "date_end_overlap": "2024-01-16",
+  "lat_range": [
+    29.25,
+    32.75
+  ],
+  "lon_range": [
+    73.25,
+    76.75
+  ],
+  "lwe_mean_overlap": -39.82092729172618,
+  "lwe_std_overlap": 21.993988485647456,
+  "uncertainty_mean_overlap": 2.4031102664399038
+}

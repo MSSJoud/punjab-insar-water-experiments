@@ -1,0 +1,40 @@
+{
+  "n_examples": 6,
+  "tiles": [
+    {
+      "tile_row": 128,
+      "tile_col": 192,
+      "end_idx": 160
+    },
+    {
+      "tile_row": 128,
+      "tile_col": 192,
+      "end_idx": 164
+    },
+    {
+      "tile_row": 128,
+      "tile_col": 192,
+      "end_idx": 168
+    },
+    {
+      "tile_row": 448,
+      "tile_col": 1024,
+      "end_idx": 162
+    },
+    {
+      "tile_row": 448,
+      "tile_col": 1024,
+      "end_idx": 166
+    },
+    {
+      "tile_row": 576,
+      "tile_col": 1088,
+      "end_idx": 160
+    }
+  ],
+  "forward_rmse_raw_mean": 14.756479501724243,
+  "forward_rmse_raw_std": 7.459202241426973,
+  "forward_rmse_norm_mean": 0.9919186532497406,
+  "forward_rmse_norm_std": 0.5014015729531388,
+  "n_batches": 6
+}

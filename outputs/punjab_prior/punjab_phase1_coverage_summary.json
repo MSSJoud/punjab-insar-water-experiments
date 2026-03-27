@@ -1,0 +1,17 @@
+{
+  "coherence_threshold": 0.2,
+  "time_valid_fraction_threshold": 0.05,
+  "sample_stride": 40,
+  "disp_sample_valid_fraction": 0.11592076302274394,
+  "disp_per_time_valid_min": 0.11592076302274394,
+  "disp_per_time_valid_max": 0.11592076302274394,
+  "disp_per_time_valid_mean": 0.11592076302274393,
+  "time_valid_fraction_mean": 0.11224108934402466,
+  "coh_valid_fraction": 0.7125472375029898,
+  "vel_valid_fraction": 0.1122410906481703,
+  "support_mask_fraction": 0.093310212867735,
+  "coh_min": 0.06664219498634338,
+  "coh_max": 0.9789242744445801,
+  "vel_min": -68.1079330444336,
+  "vel_max": 36.50641632080078
+}

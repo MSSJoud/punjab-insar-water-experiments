@@ -1,0 +1,222 @@
+[
+  {
+    "case": "clean",
+    "rmse": 7.556600570678711,
+    "mae": 5.556528091430664,
+    "bias": 0.02388988435268402,
+    "nrmse": 0.6349292457913953,
+    "r2": 0.5968648195266724,
+    "corr": 0.790368712822673,
+    "fit_slope": 0.4928691440416715,
+    "fit_intercept": 0.02442047061624496,
+    "forward_residual_rmse": 1.792094828090285e-08,
+    "best_val_loss": 0.5572237521409988,
+    "num_train_windows": 67,
+    "num_test_windows": 16,
+    "figure": "/home/ubuntu/work/punjab/outputs/figures/synthetic_tws_clean_diagnostics.png",
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.984424317950633,
+        "val_loss": 1.3662486842700414
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.9404381976198795,
+        "val_loss": 1.2270076125860214
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.8341300763300995,
+        "val_loss": 1.026288436991828
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.7106668531005063,
+        "val_loss": 0.8439189153058189
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.5711291009810433,
+        "val_loss": 0.7384878801448005
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.46068933739591,
+        "val_loss": 0.5935867960963931
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.4083254003702705,
+        "val_loss": 0.5660750951085772
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.3929289352537981,
+        "val_loss": 0.5572237521409988
+      }
+    ],
+    "noise_scale": 0.0,
+    "signal_scale": 1.0
+  },
+  {
+    "case": "low_noise",
+    "rmse": 12.37598991394043,
+    "mae": 9.575465202331543,
+    "bias": 0.0695129930973053,
+    "nrmse": 1.0398694318276427,
+    "r2": -0.0813283920288086,
+    "corr": -0.29479236489743976,
+    "fit_slope": -0.03399715685198901,
+    "fit_intercept": 0.07059480069693792,
+    "forward_residual_rmse": 0.014592370949685574,
+    "best_val_loss": 1.9081236634935652,
+    "num_train_windows": 67,
+    "num_test_windows": 16,
+    "figure": "/home/ubuntu/work/punjab/outputs/figures/synthetic_tws_low_noise_diagnostics.png",
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.4869541623699132,
+        "val_loss": 1.9081236634935652
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.4835617915907902,
+        "val_loss": 1.9087225794792175
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.4824486632845295,
+        "val_loss": 1.909507623740605
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.4814811606905354,
+        "val_loss": 1.910427715097155
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.4804202015720196,
+        "val_loss": 1.9111886194774084
+      },
+      {
+        "epoch": 6,
+        "train_loss": 1.479292255728992,
+        "val_loss": 1.9116625956126623
+      }
+    ],
+    "noise_scale": 0.25,
+    "signal_scale": 1.0
+  },
+  {
+    "case": "medium_noise",
+    "rmse": 12.35272216796875,
+    "mae": 9.56615161895752,
+    "bias": 0.049648039042949677,
+    "nrmse": 1.037914402940925,
+    "r2": -0.07726621627807617,
+    "corr": -0.22102308396065642,
+    "fit_slope": -0.029635346388063744,
+    "fit_intercept": 0.05072525544707818,
+    "forward_residual_rmse": 0.029155205935239792,
+    "best_val_loss": 1.8811097485678536,
+    "num_train_windows": 67,
+    "num_test_windows": 16,
+    "figure": "/home/ubuntu/work/punjab/outputs/figures/synthetic_tws_medium_noise_diagnostics.png",
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.4887745558325924,
+        "val_loss": 1.9028879744665963
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.4821168486751728,
+        "val_loss": 1.892129591533116
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.4793020664755978,
+        "val_loss": 1.8865731528827123
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.4766682706662078,
+        "val_loss": 1.8836742894990104
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.4744100446131692,
+        "val_loss": 1.8820695962224687
+      },
+      {
+        "epoch": 6,
+        "train_loss": 1.4722718124959007,
+        "val_loss": 1.881302194935935
+      },
+      {
+        "epoch": 7,
+        "train_loss": 1.4705927834581973,
+        "val_loss": 1.8811259184564864
+      },
+      {
+        "epoch": 8,
+        "train_loss": 1.469673653147114,
+        "val_loss": 1.8811097485678536
+      }
+    ],
+    "noise_scale": 0.5,
+    "signal_scale": 1.0
+  },
+  {
+    "case": "current_noise",
+    "rmse": 12.40768814086914,
+    "mae": 9.588760375976562,
+    "bias": -0.11725117266178131,
+    "nrmse": 1.042532816127041,
+    "r2": -0.08687448501586914,
+    "corr": -0.30293427285861363,
+    "fit_slope": -0.0362350438282143,
+    "fit_intercept": -0.11616696513184858,
+    "forward_residual_rmse": 0.05826503783464432,
+    "best_val_loss": 1.9107984474727087,
+    "num_train_windows": 67,
+    "num_test_windows": 16,
+    "figure": "/home/ubuntu/work/punjab/outputs/figures/synthetic_tws_current_noise_diagnostics.png",
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.4843465107590406,
+        "val_loss": 1.9107984474727087
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.4789636633289394,
+        "val_loss": 1.9188225354467119
+      },
+      {
+        "epoch": 3,
+        "train_loss": 1.476502315321965,
+        "val_loss": 1.9274548121861048
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.4741334007747138,
+        "val_loss": 1.9307855452810014
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.4714516525837913,
+        "val_loss": 1.9333271724837167
+      },
+      {
+        "epoch": 6,
+        "train_loss": 1.4684687514803303,
+        "val_loss": 1.9355389986719405
+      }
+    ],
+    "noise_scale": 1.0,
+    "signal_scale": 1.0
+  }
+]

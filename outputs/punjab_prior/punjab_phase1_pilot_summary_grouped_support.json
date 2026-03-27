@@ -1,0 +1,29 @@
+{
+  "epoch": 4,
+  "pilot_label": "grouped_support",
+  "train_total": 0.0953166666222387,
+  "train_forward": 0.09530760298366658,
+  "train_spatial_s0": 0.004331330990680726,
+  "train_spatial_sg": 0.0036597461912606377,
+  "train_temporal_s0": 0.0011923147567358683,
+  "train_temporal_sg": 0.0009540607561575598,
+  "train_n_samples": 64,
+  "val_total": 2.1528045863378793,
+  "val_forward": 2.1527727246284485,
+  "val_spatial_s0": 0.017394775510183536,
+  "val_spatial_sg": 0.014292400781414472,
+  "val_temporal_s0": 0.00022049688232073095,
+  "val_temporal_sg": 0.00018195312259194907,
+  "val_n_samples": 32,
+  "best_val_forward": 2.1527727246284485,
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support.pt",
+  "pilot_group_config": {
+    "strategy": "tile_grouped_temporal_progression",
+    "train_tile_count": 4,
+    "val_tile_count": 4,
+    "train_windows_per_tile": 16,
+    "val_windows_per_tile": 8
+  },
+  "learning_rate": 0.0001,
+  "init_checkpoint": null
+}

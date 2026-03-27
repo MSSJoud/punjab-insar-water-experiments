@@ -1,0 +1,14 @@
+[
+  {
+    "run": "grouped_support_expanded",
+    "val_forward": 1.4286398053169251,
+    "best_val_forward": 1.4286393945415814,
+    "forward_rmse_norm_mean": 0.9919190754493078
+  },
+  {
+    "run": "grouped_support_expanded_grace_stronger",
+    "val_forward": 1.4286389650156102,
+    "best_val_forward": 1.4286389650156102,
+    "forward_rmse_norm_mean": 0.9919186532497406
+  }
+]

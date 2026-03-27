@@ -1,0 +1,8 @@
+{
+  "median_rms_elastic_mm": 1.7733538697939366e-05,
+  "median_rms_poroelastic_mm": 1.1583086252212524,
+  "median_rms_total_mm": 1.158308744430542,
+  "median_poro_to_elastic_ratio": 73484.2578125,
+  "source": "punjab_inversion.paper_figures.make_synthetic_conditioning_figure",
+  "interpretation": "The original synthetic forward model is overwhelmingly dominated by the poroelastic response."
+}

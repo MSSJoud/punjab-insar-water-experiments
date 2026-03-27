@@ -1,0 +1,13 @@
+metric,value
+mean_temporal_corr_map,-0.135919988155365
+median_temporal_corr_map,-0.215489000082016
+mean_temporal_nrmse_map,1.145805835723877
+mean_spatial_corr_over_time,-0.12373809015439381
+median_spatial_corr_over_time,-0.9430185536953724
+mean_spatial_nrmse_over_time,1.052606522981603
+trend_corr,-0.5098177853733126
+trend_mae,1.3008573055267334
+trend_bias,-0.002329319715499878
+amplitude_corr,0.867878019524382
+amplitude_mae,7.42954683303833
+amplitude_bias,-7.42954683303833

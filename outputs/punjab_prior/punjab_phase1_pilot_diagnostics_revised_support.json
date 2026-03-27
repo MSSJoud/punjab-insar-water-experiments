@@ -1,0 +1,7 @@
+{
+  "forward_rmse_raw_mean": 25.036360025405884,
+  "forward_rmse_raw_std": 9.693600406000943,
+  "forward_rmse_norm_mean": 1.6829239875078201,
+  "forward_rmse_norm_std": 0.6515960457027753,
+  "n_batches": 4
+}

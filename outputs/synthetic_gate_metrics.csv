@@ -1,0 +1,5 @@
+split,layer,rmse,r2,corr,forward_residual_rmse,model_name,use_grace_loss,forward_model,gate_pass
+test,S0,1.8217449188232422,0.9374138712882996,0.9744808766933883,0.05827520415186882,SwinUNetPhysicsNet3D_Windowed,False,elastic+poroelastic FFT Green functions,False
+test,Ss,3.383470058441162,0.02420872449874878,0.16198053793839756,0.05827520415186882,SwinUNetPhysicsNet3D_Windowed,False,elastic+poroelastic FFT Green functions,False
+test,Sd,1.4618244171142578,0.44185638427734375,0.7086185236330935,0.05827520415186882,SwinUNetPhysicsNet3D_Windowed,False,elastic+poroelastic FFT Green functions,False
+test,Sg,8.348075866699219,-0.15404260158538818,-0.3816241395773953,0.05827520415186882,SwinUNetPhysicsNet3D_Windowed,False,elastic+poroelastic FFT Green functions,False

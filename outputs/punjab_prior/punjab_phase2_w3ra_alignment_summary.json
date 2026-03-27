@@ -1,0 +1,27 @@
+{
+  "n_times": 225,
+  "date_start": "2016-01-06",
+  "date_end": "2024-01-24",
+  "source_month_start": "2016-01-01",
+  "source_month_end": "2024-01-01",
+  "variables": [
+    "S0",
+    "Sg"
+  ],
+  "S0_mean": 0.03918535400708974,
+  "S0_std": 0.019318900508751777,
+  "S0_anom_mean": 2.1604181271045414e-19,
+  "S0_anom_std": 0.016686616751432463,
+  "Sg_mean": 0.012124672638160276,
+  "Sg_std": 0.027348165744718225,
+  "Sg_anom_mean": -7.749325890701073e-19,
+  "Sg_anom_std": 0.02101280507048153,
+  "config": {
+    "variables": [
+      "S0",
+      "Sg"
+    ],
+    "baseline_mode": "overlap_mean",
+    "write_aligned_dataset": true
+  }
+}

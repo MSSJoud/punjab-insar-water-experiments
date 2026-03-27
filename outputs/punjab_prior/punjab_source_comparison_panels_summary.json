@@ -1,0 +1,77 @@
+[
+  {
+    "summary": {
+      "velocity_limits": [
+        -15.581581115722656,
+        15.581581115722656
+      ],
+      "grace_limits": [
+        -23.68884699074567,
+        23.68884699074567
+      ],
+      "w3ra_s0_limits": [
+        -0.03274511497452657,
+        0.03274511497452657
+      ],
+      "w3ra_sg_limits": [
+        -0.04992267109867305,
+        0.04992267109867305
+      ],
+      "inversion_s0_limits": [
+        -0.0916748046875,
+        0.0916748046875
+      ],
+      "inversion_sg_limits": [
+        -0.11566162109375,
+        0.11566162109375
+      ],
+      "grace_time": "2024-01-24",
+      "w3ra_time": "2024-01-24",
+      "inversion_time": "2024-01-24",
+      "inversion_bbox_rows": [
+        0,
+        1130
+      ],
+      "inversion_bbox_cols": [
+        0,
+        1850
+      ]
+    }
+  },
+  {
+    "key": "velocity",
+    "title": "A. InSAR velocity",
+    "time": null,
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_panels/velocity.png"
+  },
+  {
+    "key": "grace_tws",
+    "title": "B. GRACE TWS anomaly\n(latest aligned date)",
+    "time": "2024-01-24",
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_panels/grace_tws.png"
+  },
+  {
+    "key": "w3ra_s0",
+    "title": "C. W3RA $S_0$ anomaly\n(latest aligned date)",
+    "time": "2024-01-24",
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_panels/w3ra_s0.png"
+  },
+  {
+    "key": "w3ra_sg",
+    "title": "D. W3RA $S_g$ anomaly\n(latest aligned date)",
+    "time": "2024-01-24",
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_panels/w3ra_sg.png"
+  },
+  {
+    "key": "inversion_s0",
+    "title": "E. Inversion $S_0$\n(latest available date)",
+    "time": "2024-01-24",
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_panels/inversion_s0.png"
+  },
+  {
+    "key": "inversion_sg",
+    "title": "F. Inversion $S_g$\n(latest available date)",
+    "time": "2024-01-24",
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_source_comparison_panels/inversion_sg.png"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "epoch": 4.0,
+  "train_total": 0.1536382477643201,
+  "train_forward": 0.15362964557425585,
+  "train_spatial_s0": 0.0048513852489122655,
+  "train_spatial_sg": 0.0037523816026805434,
+  "train_temporal_s0": 0.0,
+  "train_temporal_sg": 0.0,
+  "train_n_samples": 64.0,
+  "val_total": 3.6048101347405463,
+  "val_forward": 3.6047796371858567,
+  "val_spatial_s0": 0.01622211620269809,
+  "val_spatial_sg": 0.014304339980299119,
+  "val_temporal_s0": 0.0,
+  "val_temporal_sg": 0.0,
+  "val_n_samples": 32.0,
+  "best_val_forward": 3.6047796371858567,
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best.pt"
+}

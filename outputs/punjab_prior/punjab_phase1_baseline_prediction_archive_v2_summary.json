@@ -1,0 +1,15 @@
+{
+  "output_path": "outputs/punjab_prior/punjab_phase1_baseline_prediction_archive_v2.h5",
+  "summary_path": "outputs/punjab_prior/punjab_phase1_baseline_prediction_archive_v2_summary.json",
+  "preview_path": "outputs/punjab_prior/punjab_phase1_baseline_prediction_archive_v2.png",
+  "n_times": 214,
+  "n_tiles": 65,
+  "n_supported_pixels": 195065,
+  "date_start": "2016-10-20",
+  "date_end": "2024-01-24",
+  "grid_shape": [
+    1130,
+    1850
+  ],
+  "checkpoint_path": "outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support_expanded.pt"
+}

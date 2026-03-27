@@ -1,0 +1,35 @@
+{
+  "epoch": 4,
+  "pilot_label": "grouped_support_expanded_reliability_finetune",
+  "train_total": 0.7121286477427929,
+  "train_forward": 0.7121198984328657,
+  "train_spatial_s0": 0.004054979703505523,
+  "train_spatial_sg": 0.003699282334612993,
+  "train_temporal_s0": 0.001031246412458131,
+  "train_temporal_sg": 0.000980822696631852,
+  "train_n_samples": 120,
+  "val_total": 6.065649221092462,
+  "val_forward": 6.065625870724519,
+  "val_spatial_s0": 0.011422441503964365,
+  "val_spatial_sg": 0.011784392114107808,
+  "val_temporal_s0": 0.0003267969499574974,
+  "val_temporal_sg": 0.000344751043303404,
+  "val_n_samples": 60,
+  "best_val_forward": 6.065624987830718,
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support_expanded_reliability_finetune.pt",
+  "reliability_weight_config": {
+    "strategy": "coherence_temporal_weighted_forward",
+    "coherence_floor": 0.25,
+    "power": 0.5,
+    "train_label": "grouped_support_expanded_reliability_finetune",
+    "num_epochs": 4
+  },
+  "reliability_stats": {
+    "support_fraction": 0.093310212867735,
+    "weight_min": 0.25048011541366577,
+    "weight_mean": 0.5532239675521851,
+    "weight_max": 0.9900548458099365
+  },
+  "init_checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best.pt",
+  "learning_rate": 5e-05
+}

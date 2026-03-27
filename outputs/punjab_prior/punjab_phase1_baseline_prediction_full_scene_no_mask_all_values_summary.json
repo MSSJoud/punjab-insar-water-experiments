@@ -1,0 +1,15 @@
+{
+  "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_baseline_prediction_full_scene_no_mask_all_values.h5",
+  "summary_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_baseline_prediction_full_scene_no_mask_all_values_summary.json",
+  "preview_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_baseline_prediction_full_scene_no_mask_all_values.png",
+  "n_times": 214,
+  "n_tiles": 522,
+  "n_supported_pixels": 2090500,
+  "date_start": "2016-10-20",
+  "date_end": "2024-01-24",
+  "grid_shape": [
+    1130,
+    1850
+  ],
+  "checkpoint_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support_expanded.pt"
+}

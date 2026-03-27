@@ -1,0 +1,41 @@
+{
+  "epoch": 4,
+  "pilot_label": "grouped_support_expanded_grace_uncertainty_anom",
+  "train_total": 0.40674773081361004,
+  "train_forward": 0.17000599444921438,
+  "train_spatial_s0": 0.00854536450157563,
+  "train_spatial_sg": 0.019410939328372477,
+  "train_temporal_s0": 0.003218299321694455,
+  "train_temporal_sg": 0.007511896527042457,
+  "train_grace": 4.734168227513631,
+  "train_n_samples": 120,
+  "val_total": 2.4971768426398437,
+  "val_forward": 1.428638677423199,
+  "val_spatial_s0": 0.015440309513360262,
+  "val_spatial_sg": 0.02938981478412946,
+  "val_temporal_s0": 0.000822266024867228,
+  "val_temporal_sg": 0.001495363020512741,
+  "val_grace": 21.369843419392904,
+  "val_n_samples": 60,
+  "best_val_forward": 1.428638298685352,
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase2_pilot_best_grouped_support_expanded_grace_uncertainty_anom.pt",
+  "weights": {
+    "forward": 1.0,
+    "spatial_s0": 0.001,
+    "spatial_sg": 0.001,
+    "temporal_s0": 0.0005,
+    "temporal_sg": 0.0005,
+    "hydrology": 0.0,
+    "grace": 0.05,
+    "gps": 0.0
+  },
+  "learning_rate": 5e-05,
+  "init_checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support_expanded.pt",
+  "grace_prior_config": {
+    "strategy": "grouped_support_expanded_grace_uncertainty_anom",
+    "grace_weight": 0.05,
+    "learning_rate": 5e-05,
+    "num_epochs": 4,
+    "uncertainty_floor": 1.0
+  }
+}

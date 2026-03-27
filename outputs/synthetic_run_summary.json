@@ -1,0 +1,46 @@
+{
+  "device": "cuda",
+  "best_val_loss": 4.821589095251901,
+  "num_train_windows": 67,
+  "num_val_windows": 14,
+  "num_test_windows": 16,
+  "history_csv": "/home/ubuntu/work/punjab/outputs/synthetic_training_history.csv",
+  "metrics_csv": "/home/ubuntu/work/punjab/outputs/synthetic_gate_metrics.csv",
+  "timeseries_plot": "/home/ubuntu/work/punjab/outputs/figures/synthetic_timeseries_layers_test.png",
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/swin3d_physics_best.pt",
+  "normalization": {
+    "inputs": "train-split per-pixel/per-window-position z-score",
+    "targets": "train-split per-pixel z-score",
+    "physics_loss": "denormalized layer predictions -> elastic+poroelastic forward model -> renormalized deformation"
+  },
+  "forward_model": {
+    "layers": [
+      "S0",
+      "Ss",
+      "Sd",
+      "Sg"
+    ],
+    "elastic_load_layers": [
+      "S0",
+      "Ss",
+      "Sd"
+    ],
+    "poroelastic_layers": [
+      "Sg"
+    ],
+    "implementation": "explicit elastic and poroelastic Green's functions with FFT convolution"
+  },
+  "architecture": {
+    "type": "windowed and shifted-attention Swin-U-Net-style 3D model",
+    "window_size": [
+      3,
+      4,
+      4
+    ],
+    "patch_size": [
+      2,
+      4,
+      4
+    ]
+  }
+}

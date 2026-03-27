@@ -1,0 +1,37 @@
+[
+  {
+    "variant": "revised_support_bounded",
+    "val_forward": 3.6047796371858567,
+    "val_total": 3.6048101347405463,
+    "train_forward": 0.15362964557425585,
+    "best_val_forward": 3.6047796371858567
+  },
+  {
+    "variant": "grouped_support_temporal",
+    "val_forward": 2.1527727246284485,
+    "val_total": 2.1528045863378793,
+    "train_forward": 0.09530760298366658,
+    "best_val_forward": 2.1527727246284485
+  },
+  {
+    "variant": "grouped_support_expanded",
+    "val_forward": 1.4286398053169251,
+    "val_total": 1.4286608452598253,
+    "train_forward": 0.17000612701910237,
+    "best_val_forward": 1.4286393945415814
+  },
+  {
+    "variant": "phase1_fuller",
+    "val_forward": 2.4986170306025692,
+    "val_total": 2.498633650286744,
+    "train_forward": 0.23415039026440354,
+    "best_val_forward": 2.4986164928413928
+  },
+  {
+    "variant": "phase1_fuller_finetune",
+    "val_forward": 2.4986169438343495,
+    "val_total": 2.498639785218984,
+    "train_forward": 0.2341503930899004,
+    "best_val_forward": 2.4986163816259555
+  }
+]

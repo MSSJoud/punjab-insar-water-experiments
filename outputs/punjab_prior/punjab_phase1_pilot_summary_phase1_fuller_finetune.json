@@ -1,0 +1,32 @@
+{
+  "epoch": 6,
+  "pilot_label": "phase1_fuller_finetune",
+  "train_total": 0.23415608749443587,
+  "train_forward": 0.2341503930899004,
+  "train_spatial_s0": 0.002486586321841363,
+  "train_spatial_sg": 0.002520708897160754,
+  "train_temporal_s0": 0.0006834758393476174,
+  "train_temporal_sg": 0.0006873299920092298,
+  "train_n_samples": 192,
+  "val_total": 2.498639785218984,
+  "val_forward": 2.4986169438343495,
+  "val_spatial_s0": 0.011087206010415684,
+  "val_spatial_sg": 0.011462648789650606,
+  "val_temporal_s0": 0.00026787667547978344,
+  "val_temporal_sg": 0.00028963269755877263,
+  "val_n_samples": 96,
+  "best_val_forward": 2.4986163816259555,
+  "checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_phase1_fuller_finetune.pt",
+  "pilot_group_config": {
+    "strategy": "phase1_fuller_warmstart_finetune",
+    "train_tile_count": 8,
+    "val_tile_count": 8,
+    "train_windows_per_tile": 24,
+    "val_windows_per_tile": 12,
+    "num_epochs": 6,
+    "learning_rate": 5e-05,
+    "init_from": "grouped_support_expanded"
+  },
+  "learning_rate": 5e-05,
+  "init_checkpoint": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support_expanded.pt"
+}

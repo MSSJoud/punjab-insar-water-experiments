@@ -1,0 +1,68 @@
+[
+  {
+    "label": "Phase 1 Baseline",
+    "run_key": "grouped_support_expanded",
+    "val_forward": 1.4286398053169251,
+    "best_val_forward": 1.4286393945415814,
+    "val_total": 1.4286608452598253,
+    "val_hydrology": NaN,
+    "val_grace": NaN,
+    "forward_rmse_norm_mean": 0.9919190754493078,
+    "forward_rmse_raw_mean": 14.7564857006073
+  },
+  {
+    "label": "W3RA Weak",
+    "run_key": "grouped_support_expanded_w3ra_weak",
+    "val_forward": 1.4286397812267144,
+    "best_val_forward": 1.4286396590371926,
+    "val_total": 1.42868294082582,
+    "val_hydrology": 0.00041319404820872784,
+    "val_grace": NaN,
+    "forward_rmse_norm_mean": 0.9919190754493078,
+    "forward_rmse_raw_mean": 14.7564857006073
+  },
+  {
+    "label": "W3RA Stronger",
+    "run_key": "grouped_support_expanded_w3ra_stronger",
+    "val_forward": 1.428639812891682,
+    "best_val_forward": 1.4286396839966378,
+    "val_total": 1.4287413187325,
+    "val_hydrology": 0.00039277685079165773,
+    "val_grace": NaN,
+    "forward_rmse_norm_mean": 0.9919190754493078,
+    "forward_rmse_raw_mean": 14.7564857006073
+  },
+  {
+    "label": "GRACE Weak",
+    "run_key": "grouped_support_expanded_grace_weak",
+    "val_forward": 1.4286390022685131,
+    "best_val_forward": 1.4286390022685131,
+    "val_total": 1.5255405413607757,
+    "val_hydrology": NaN,
+    "val_grace": 1.9370611707369487,
+    "forward_rmse_norm_mean": 0.9919186780850092,
+    "forward_rmse_raw_mean": 14.75648013750712
+  },
+  {
+    "label": "GRACE Stronger",
+    "run_key": "grouped_support_expanded_grace_stronger",
+    "val_forward": 1.4286389650156102,
+    "best_val_forward": 1.4286389650156102,
+    "val_total": 1.8016584848364194,
+    "val_hydrology": NaN,
+    "val_grace": 1.86485286206007,
+    "forward_rmse_norm_mean": 0.9919186532497406,
+    "forward_rmse_raw_mean": 14.756479501724243
+  },
+  {
+    "label": "GRACE Reformulated",
+    "run_key": "grouped_support_expanded_grace_uncertainty_anom",
+    "val_forward": 1.428638677423199,
+    "best_val_forward": 1.428638298685352,
+    "val_total": 2.4971768426398437,
+    "val_hydrology": NaN,
+    "val_grace": 21.369843419392904,
+    "forward_rmse_norm_mean": 0.9919184098641077,
+    "forward_rmse_raw_mean": 14.756476322809855
+  }
+]

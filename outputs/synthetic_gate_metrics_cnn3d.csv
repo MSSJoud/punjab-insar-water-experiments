@@ -1,0 +1,2 @@
+split,layer,rmse,r2,corr,forward_residual_rmse,model_name
+test,Sg,2.3857717461662107,-16.64317144891569,0.8007043465632944,1.328137993812561,CNN3DBaseline

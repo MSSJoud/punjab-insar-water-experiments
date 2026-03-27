@@ -1,0 +1,22 @@
+{
+  "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/figures/punjab_paper_study_area.png",
+  "paper_output_path": "/home/ubuntu/work/punjab/paper_figures/Fig06a_punjab_study_region.png",
+  "study_bbox": [
+    75.5972,
+    76.8819,
+    31.1222,
+    31.75
+  ],
+  "regional_bbox": [
+    73.0,
+    77.0,
+    29.0,
+    33.0
+  ],
+  "sentinel_bounds": [
+    75.597569,
+    76.881597,
+    31.1225,
+    31.749722
+  ]
+}

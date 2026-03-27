@@ -1,0 +1,46 @@
+{
+  "archive_summary": {
+    "output_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_two_pixel_timeseries_no_mask.h5",
+    "summary_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_two_pixel_timeseries_no_mask_summary.json",
+    "preview_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_two_pixel_timeseries_no_mask.png",
+    "n_times": 214,
+    "n_tiles": 2,
+    "n_supported_pixels": 8192,
+    "date_start": "2016-10-20",
+    "date_end": "2024-01-24",
+    "grid_shape": [
+      1130,
+      1850
+    ],
+    "checkpoint_path": "/home/ubuntu/work/punjab/outputs/punjab_prior/punjab_phase1_pilot_best_grouped_support_expanded.pt"
+  },
+  "pixels": {
+    "high_coherence": {
+      "row": 461,
+      "col": 630,
+      "lat": 31.378611111097964,
+      "lon": 76.03506944441465,
+      "coherence": 0.9789242744445801
+    },
+    "river_reference": {
+      "row": 241,
+      "col": 1401,
+      "lat": 31.256388888871417,
+      "lon": 76.57048611107206,
+      "coherence": null
+    }
+  },
+  "river_reference_selection": {
+    "requested_lat": 31.229126,
+    "requested_lon": 76.56497,
+    "original_nearest_row": 192,
+    "original_nearest_col": 1393,
+    "selected_row": 241,
+    "selected_col": 1401,
+    "selected_lat": 31.256388888871417,
+    "selected_lon": 76.57048611107206,
+    "selected_distance_deg": 0.027815330143185775,
+    "selected_s0_std": 0.010664217174053192,
+    "selected_sg_std": 0.011741409078240395
+  }
+}

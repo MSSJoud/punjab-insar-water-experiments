@@ -1,0 +1,16 @@
+{
+  "search_roots": [
+    "/home/ubuntu/work/punjab",
+    "/mnt/data"
+  ],
+  "patterns": [
+    "*GRACE*",
+    "*grace*",
+    "*mascon*",
+    "*mascons*",
+    "*JPL*",
+    "*CSR*"
+  ],
+  "n_candidates": 0,
+  "candidates": []
+}

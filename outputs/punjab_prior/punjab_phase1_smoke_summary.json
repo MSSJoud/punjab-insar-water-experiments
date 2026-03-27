@@ -1,0 +1,17 @@
+{
+  "epoch": 2.0,
+  "train_total": 0.14191499160369858,
+  "train_forward": 0.14184644783381373,
+  "train_spatial_s0": 0.01949225942371413,
+  "train_spatial_sg": 0.04905263427644968,
+  "train_temporal_s0": 0.0,
+  "train_temporal_sg": 0.0,
+  "train_n_samples": 16.0,
+  "val_total": 2.0029322057962418,
+  "val_forward": 2.0028673065826297,
+  "val_spatial_s0": 0.019892610143870115,
+  "val_spatial_sg": 0.044997346587479115,
+  "val_temporal_s0": 0.0,
+  "val_temporal_sg": 0.0,
+  "val_n_samples": 8.0
+}
