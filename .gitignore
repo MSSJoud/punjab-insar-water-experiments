@@ -31,4 +31,7 @@ venv/
 *.zip
 
 # Keep lightweight paper outputs and summaries, but do not force-add huge binary exports
+
+# Separate clean package repo lives inside this workspace but should not be tracked here
+swin3d-dual-decoder-insar-inversion/
 *.pdf

@@ -357,7 +357,22 @@ archive_lon = archive['lon'][:].astype(np.float32)
 s0_store = archive['s0']
 sg_store = archive['sg']
 archive_available = archive_index_map >= 0
-available_rows, available_cols = np.where(archive_available)
+
+# Keep interactive selection on pixels that have both stored predictions and
+# at least one finite observed InSAR value over the plotted archive dates.
+interactive_available = np.zeros_like(archive_available, dtype=bool)
+row_chunk = 64
+for row0 in range(0, archive_available.shape[0], row_chunk):
+    row1 = min(row0 + row_chunk, archive_available.shape[0])
+    observed_block = np.asarray(
+        disp_ds[archive_end_indices, row0:row1, :],
+        dtype=np.float32,
+    )
+    interactive_available[row0:row1, :] = archive_available[row0:row1, :] & np.isfinite(observed_block).any(axis=0)
+
+available_rows, available_cols = np.where(interactive_available)
+if available_rows.size == 0:
+    raise RuntimeError('No pixels found with both stored predictions and finite observed deformation.')
 
 vel_vmin, vel_vmax = np.nanpercentile(
     np.abs(vel_map[np.isfinite(vel_map)]),
@@ -414,7 +429,7 @@ def update_click(row: int, col: int) -> None:
     idx = int(archive_index_map[row, col])
     requested_row, requested_col = row, col
     snapped = False
-    if idx < 0:
+    if idx < 0 or not interactive_available[row, col]:
         distances = (available_rows - row) ** 2 + (available_cols - col) ** 2
         nearest = int(np.argmin(distances))
         row = int(available_rows[nearest])
@@ -473,6 +488,11 @@ load_button.on_click(on_load_button)
 
 center_row = int(len(archive_lat) // 2)
 center_col = int(len(archive_lon) // 2)
+if not interactive_available[center_row, center_col]:
+    distances = (available_rows - center_row) ** 2 + (available_cols - center_col) ** 2
+    nearest = int(np.argmin(distances))
+    center_row = int(available_rows[nearest])
+    center_col = int(available_cols[nearest])
 update_click(center_row, center_col)
 
 controls = widgets.HBox([lat_box, lon_box, load_button])
